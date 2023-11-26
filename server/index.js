@@ -284,6 +284,7 @@ app.get('/sensor-data/:sensorName/:siteId', authenticateToken, (req, res) => {
 });
 
 // Middleware to authenticate requests using JWT
+// Middleware to authenticate requests using JWT
 function authenticateToken(req, res, next) {
   const token = req.headers['authorization'];
 
@@ -299,6 +300,7 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
+
 
 app.get('/user', authenticateToken, (req, res) => {
   // The user information is available in req.decoded

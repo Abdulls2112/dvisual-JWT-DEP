@@ -22,7 +22,7 @@ const Register = () => {
     };
 
     try {
-      const response = await axios.post('https://dvisual-deployment-server.vercel.app/register', userData);
+      const response = await axios.post('https://dvisual-server-api.vercel.app/register', userData);
 
       if (response.data.msg) {
         setMsg(response.data.msg);

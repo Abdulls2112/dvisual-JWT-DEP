@@ -11,7 +11,7 @@ const Logout = () => {
         // Clear the token from localStorage
         localStorage.removeItem('token');
         // Remove the Authorization header for Axios
-        delete axios.defaults.headers.common['Authorization'];
+        delete axios.defaults.headers.common['authorization'];
         // Redirect to the login page
         history.push('/login');
       } catch (error) {

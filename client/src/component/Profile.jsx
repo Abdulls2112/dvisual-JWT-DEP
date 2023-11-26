@@ -13,7 +13,7 @@ const Profile = () => {
   useEffect(() => {
  const fetchData = async () => {
   try {
-    try {
+    
     // Retrieve token from local storage
     const token = localStorage.getItem('token');
 

@@ -131,7 +131,7 @@ app.post('/login', (req, res) => {
       bcrypt.compare(password, result[0].password, (err, response) => {
         if (response) {
           const user = result[0];
-          const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
+          const token = jwt.sign({ userId: user.id, email: user.email }, '0GJsp4gtlpqiSccUvZCh1XB1XtAOAJTITKj0BRtlQP8', { expiresIn: '1h' });
           return res.json({ login: true, useremail: email, token });
         } else {
           return res.json({ login: false, msg: 'Wrong Password' });
@@ -298,7 +298,7 @@ function authenticateToken(req, res, next) {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, secretKey, (err, decoded) => {
+  jwt.verify(token, '0GJsp4gtlpqiSccUvZCh1XB1XtAOAJTITKj0BRtlQP8', (err, decoded) => {
     if (err) {
       console.error('JWT Verification Error:', err);
       return res.sendStatus(403);

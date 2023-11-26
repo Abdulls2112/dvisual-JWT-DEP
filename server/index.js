@@ -288,18 +288,26 @@ app.get('/sensor-data/:sensorName/:siteId', authenticateToken, (req, res) => {
 function authenticateToken(req, res, next) {
   const token = req.headers['authorization'];
 
+  console.log('Received Token:', token); // Log the received token
+
   if (!token) {
+    console.error('No Token Provided');
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, 'abdullah', (err, decoded) => {
+  jwt.verify(token, 'your-secret-key', (err, decoded) => {
     if (err) {
+      console.error('JWT Verification Error:', err);
       return res.sendStatus(403);
     }
+
+    console.log('Decoded Token:', decoded); // Log the decoded token
+
     req.decoded = decoded;
     next();
   });
 }
+
 
 
 app.get('/user', authenticateToken, (req, res) => {

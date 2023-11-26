@@ -11,7 +11,7 @@ const BaseURL = process.env.URL || '';
 const app = express();
 
 app.use(cors({
-  origin: 'https://dvisual-five.vercel.app',
+  origin: 'https://dvisual-jwt-dep.vercel.app',
   credentials: true,
 }));
 app.use(express.json());

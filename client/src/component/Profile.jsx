@@ -13,6 +13,16 @@ const Profile = () => {
   useEffect(() => {
  const fetchData = async () => {
   try {
+    try {
+    // Retrieve token from local storage
+    const token = localStorage.getItem('token');
+
+    // Check if token is present
+    if (!token) {
+      // Handle the case where the token is not present
+      console.error('Token not found in local storage');
+      return;
+    }
     // Fetch user information using the new /user endpoint
     const userResponse = await axios.get('https://dvisual-server-api.vercel.app/user', {
       headers: {

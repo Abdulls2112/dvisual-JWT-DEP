@@ -295,7 +295,7 @@ function authenticateToken(req, res, next) {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, 'your-secret-key', (err, decoded) => {
+  jwt.verify(token, 'abdullah', (err, decoded) => {
     if (err) {
       console.error('JWT Verification Error:', err);
       return res.sendStatus(403);

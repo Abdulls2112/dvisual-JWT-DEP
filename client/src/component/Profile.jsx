@@ -14,20 +14,20 @@ const Profile = () => {
   const fetchData = async () => {
   try {
     // Fetch user information using the new /user endpoint
-    const userResponse = await axios.get('https://dvisual-deployment-server.vercel.app/user');
+    const userResponse = await axios.get('https://dvisual-server-api.vercel.app/user');
     if (userResponse.data.success) {
       setLogin(true);
       setEmail(userResponse.data.user.email);
 
       // Fetch organization name
       const organizationResponse = await axios.get(
-        `https://dvisual-deployment-server.vercel.app/organization/${userResponse.data.user.id}`
+        `https://dvisual-server-api.vercel.app/organization/${userResponse.data.user.id}`
       );
       setOrganizationName(organizationResponse.data.organizationname);
 
       // Fetch the list of sites for the logged-in user's organization
       const sitesResponse = await axios.get(
-        `https://dvisual-deployment-server.vercel.app/sites/${userResponse.data.user.organisation_id}`
+        `https://dvisual-server-api.vercel.app/sites/${userResponse.data.user.organisation_id}`
       );
       setSites(sitesResponse.data.sites);
     } else {

@@ -15,7 +15,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/login', user);
+      const response = await axios.post('https://dvisual-server-api.vercel.app/login', user);
       setShow(response.data.login);
       if (response.data.msg) {
         setMsg(response.data.msg);

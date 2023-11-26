@@ -5,10 +5,13 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 
 const PORT = process.env.PORT || 8000;
 const BaseURL = process.env.URL || '';
 const app = express();
+const secretKey = crypto.randomBytes(32).toString('hex');
+
 
 app.use(cors({
   origin: 'https://dvisual-jwt-dep.vercel.app',
@@ -128,7 +131,7 @@ app.post('/login', (req, res) => {
       bcrypt.compare(password, result[0].password, (err, response) => {
         if (response) {
           const user = result[0];
-          const token = jwt.sign({ userId: user.id, email: user.email }, 'abdullah', { expiresIn: '1h' });
+          const token = jwt.sign({ userId: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
           return res.json({ login: true, useremail: email, token });
         } else {
           return res.json({ login: false, msg: 'Wrong Password' });
@@ -295,7 +298,7 @@ function authenticateToken(req, res, next) {
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, 'abdullah', (err, decoded) => {
+  jwt.verify(token, secretKey, (err, decoded) => {
     if (err) {
       console.error('JWT Verification Error:', err);
       return res.sendStatus(403);

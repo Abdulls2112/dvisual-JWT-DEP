@@ -24,7 +24,7 @@ const Login = () => {
       if (response.data.login) {
         const token = response.data.token;
         localStorage.setItem('token', token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
       }
     } catch (error) {
       console.error('Error during login:', error);

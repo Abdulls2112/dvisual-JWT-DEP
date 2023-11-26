@@ -300,8 +300,10 @@ function authenticateToken(req, res, next) {
 
   jwt.verify(token, '0GJsp4gtlpqiSccUvZCh1XB1XtAOAJTITKj0BRtlQP8', (err, decoded) => {
     if (err) {
-      console.error('JWT Verification Error:', err);
-      return res.sendStatus(403);
+      console.error('JWT Verification Error:', err.message);
+    console.log('Decoded Information:', decoded);
+    return res.sendStatus(403);
+     
     }
 
     console.log('Decoded Token:', decoded); // Log the decoded token

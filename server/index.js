@@ -19,6 +19,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(authenticateToken);
 
 const db = mysql.createConnection({
   host: 'database-1.caoacq3ev5m0.eu-north-1.rds.amazonaws.com',
@@ -131,7 +132,7 @@ app.post('/login', (req, res) => {
       bcrypt.compare(password, result[0].password, (err, response) => {
         if (response) {
           const user = result[0];
-          const token = jwt.sign({ userId: user.id, email: user.email }, '0GJsp4gtlpqiSccUvZCh1XB1XtAOAJTITKj0BRtlQP8', { expiresIn: '1h' });
+          const token = jwt.sign({ userId: user.id, email: user.email }, '0GJsp4gtlpqiSccUvZCh1XB1XtAOAJTITKj0BRtlQP8', { expiresIn: '8h' });
           return res.json({ login: true, useremail: email, token });
         } else {
           return res.json({ login: false, msg: 'Wrong Password' });

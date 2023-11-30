@@ -26,7 +26,7 @@ const Profile = () => {
     // Fetch user information using the new /user endpoint
     const userResponse = await axios.get('https://dvisual-server-api.vercel.app/user', {
       headers: {
-        authorization: `Bearer ${token}`, // Include your actual token here
+        authorization: `${token}`, // Include your actual token here
       },
     });
 

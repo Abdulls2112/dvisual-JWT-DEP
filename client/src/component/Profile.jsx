@@ -9,6 +9,9 @@ const Profile = () => {
   const [sites, setSites] = useState([]);
   const history = useHistory();
   const [error, setError] = useState('');
+ const [siteName, setSiteName] = useState('');
+  const [siteLocation, setSiteLocation] = useState('');
+  const [showAddSiteForm, setShowAddSiteForm] = useState(false);
 
   useEffect(() => {
  const fetchData = async () => {

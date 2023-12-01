@@ -95,9 +95,7 @@ const Profile = () => {
       setSiteLocation('');
       setError('');
 
-    } else {
-      setError(response.data.error);
-    }
+    } 
   } catch (error) {
     console.error('Error adding site:', error);
     setError('Internal Server Error');

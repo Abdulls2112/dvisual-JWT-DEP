@@ -6,7 +6,8 @@ const Home = () => {
     <>
       <section
         style={{
-          backgroundColor: '#333',
+          backgroundColor: '#fff',
+          color: '#333',
           width: '100%',
           height: '90vh',
           display: 'flex',
@@ -18,17 +19,16 @@ const Home = () => {
           style={{
             textAlign: 'center',
             padding: '40px',
-            border: '1px solid #555',
+            border: '1px solid #ddd',
             borderRadius: '10px',
-            boxShadow: '0 0 20px rgba(255, 255, 255, 0.1)',
-            backgroundColor: '#1A1A1A',
-            color: '#fff',
+            boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#f5f5f5',
           }}
         >
-          <h1 style={{ fontSize: '3em', marginBottom: '20px', color: '#D7A881' }}>
+          <h1 style={{ fontSize: '3em', marginBottom: '20px', color: '#333' }}>
             Welcome to DVisual
           </h1>
-          <p style={{ fontSize: '1.2em', color: '#aaa', marginBottom: '30px' }}>
+          <p style={{ fontSize: '1.2em', color: '#666', marginBottom: '30px' }}>
             A data visualization app that helps you explore and analyze sensor
             consumptions with ease.
           </p>

@@ -11,7 +11,7 @@ useEffect(() => {
         if (token) {
       // You can perform additional JWT validation here if needed
       // For simplicity, we'll just assume that if a token is present, the user is logged in
-      setIsLoggedIn(true);
+      isLoggedIn(true);
     }
         setForceRender(prev => !prev); // Force a re-render
       } catch (error) {

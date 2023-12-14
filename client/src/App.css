@@ -99,16 +99,35 @@ section{
       padding-top: 250px;
     
     } */
-    .box{
-      margin-top: 100px;
-      margin-left: 800px;
-      background-color: #1A1A1A;
-    }
+  .box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  width: 300px; /* Adjust the width as needed */
+}
+
+/* Additional styling for text inside the box */
+.box p {
+  margin: 0; /* Remove default margin */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.box p:first-child {
+  margin-bottom: 10px;
+}
+
   .sitedabba {
   width: 100%;
   height: 50%;
   text-align: center;
-  background-color: #1A1A1A;
+  background-color: rgb(248, 248, 248);
 }
 
 .added-button {

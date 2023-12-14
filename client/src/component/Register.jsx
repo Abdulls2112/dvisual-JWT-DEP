@@ -43,7 +43,14 @@ const Register = () => {
   };
 
   return (
-    <div className="container" id="formm">
+    <div
+      className="container"
+      id="formm"
+      style={{
+        backgroundColor: 'white', // Dark background color
+        color: 'black', // Light text color
+      }}
+    >
       <div className="row">
         <div className="col-lg-6 col-md-8 col-12 mx-auto">
           {msg && (

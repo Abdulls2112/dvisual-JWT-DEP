@@ -3,17 +3,34 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check if a JWT token is present in local storage
-    const token = localStorage.getItem('jwtToken');
-
-    if (token) {
+  const [forceRender, setForceRender] = useState(false);
+useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
       // You can perform additional JWT validation here if needed
       // For simplicity, we'll just assume that if a token is present, the user is logged in
       setIsLoggedIn(true);
     }
+        setForceRender(prev => !prev); // Force a re-render
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    };
+  
+    checkLogin();
   }, [forceRender]);
+ // useEffect(() => {
+    // Check if a JWT token is present in local storage
+    //const token = localStorage.getItem('jwtToken');
+
+    //if (token) {
+      // You can perform additional JWT validation here if needed
+      // For simplicity, we'll just assume that if a token is present, the user is logged in
+     // setIsLoggedIn(true);
+   // }
+//  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light rounded" style={{ backdropFilter: 'blur(34px)' }}>

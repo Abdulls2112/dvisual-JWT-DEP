@@ -78,7 +78,7 @@ const Visualize = ({ siteId }) => {
 
   return (
     <div style={{ backgroundColor: '#333', color: 'white', minHeight: '100vh', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h1>Visualize Page</h1>
+      <h2>Visualize Page</h2>
       <label style={{ marginRight: '10px' }}>Select Sensor:</label>
       <select
         value={selectedSensor}
@@ -98,7 +98,7 @@ const Visualize = ({ siteId }) => {
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', width: '100%' }}>
         {/* Line Chart */}
         <div style={{ width: '30%', marginBottom: '20px' }}>
-          <h2>Line Chart for {selectedSensor}</h2>
+          <h4>Line Chart for {selectedSensor}</h4>
           <ResponsiveContainer width="100%" height={400}>
             <LineChart data={sensorData}>
               <XAxis dataKey="date" />
@@ -112,7 +112,7 @@ const Visualize = ({ siteId }) => {
 
         {/* Bar Chart */}
         <div style={{ width: '30%', marginBottom: '20px' }}>
-          <h2>Bar Chart for {selectedSensor}</h2>
+          <h4>Bar Chart for {selectedSensor}</h4>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={sensorData}>
               <XAxis dataKey="time" tickFormatter={formatTime} />
@@ -126,7 +126,7 @@ const Visualize = ({ siteId }) => {
 
         {/* Pie Chart */}
         <div style={{ width: '30%', marginBottom: '20px' }}>
-          <h2>Pie Chart for {selectedSensor}</h2>
+          <h4>Pie Chart for {selectedSensor}</h4>
           <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie

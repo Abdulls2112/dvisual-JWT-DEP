@@ -178,31 +178,49 @@ section{
 
 
 .afterbutton {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
-  border: 1px solid black;
-  bottom: 20px;
-  text-align: center;
-  padding-top: 50px;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px); /* Apply blur to the background */
+}
+
+.afterbutton form {
+  background: #fff; /* White background for the form */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.afterbutton input {
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .afterbutton button {
-  background: linear-gradient(to bottom, #D7A881 5%, #D7A881 100%);
-  background-color: #D7A881;
+  background: linear-gradient(to bottom, #3498db 5%, #2980b9 100%); /* Update to your preferred colors */
+  background-color: #3498db;
+  border: none;
   border-radius: 8px;
-  display: inline-block;
+  color: #fff;
   cursor: pointer;
   font-size: 15px;
   font-weight: bold;
   padding: 13px 32px;
   text-decoration: none;
-  text-shadow: 0px 1px 0px #D7A881;
+  transition: background 0.3s ease;
 }
 
 .afterbutton button:hover {
-  background: linear-gradient(to bottom, #eb7311 5%, #eb6d07 100%);
-  background-color: #D7A881;
+  background: linear-gradient(to bottom, #2980b9 5%, #3498db 100%);
+  background-color: #2980b9;
 }
 
 .afterbutton button:active {

@@ -11,9 +11,9 @@ const Navbar = () => {
     if (token) {
       // You can perform additional JWT validation here if needed
       // For simplicity, we'll just assume that if a token is present, the user is logged in
-      isLoggedIn==true;
+      setIsLoggedIn(true);
     }
-  }, []);
+  }, [forceRender]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light rounded" style={{ backdropFilter: 'blur(34px)' }}>

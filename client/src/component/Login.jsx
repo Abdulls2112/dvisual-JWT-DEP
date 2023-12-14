@@ -63,7 +63,7 @@ const Login = () => {
             <br />
             <form onSubmit={onSubmit}>
               <div className="form-group">
-                <label style="color: black">Email address:</label>
+                <label style={{ color: 'black'}}>Email address:</label>
                 <input
                   type="email"
                   className="form-control"
@@ -75,7 +75,7 @@ const Login = () => {
                 />
               </div>
               <div className="form-group">
-                <label style="color: black">Password:</label>
+                <label style={{ color: 'black'}}>Password:</label>
                 <input
                   type="password"
                   className="form-control"
@@ -92,7 +92,7 @@ const Login = () => {
               </button>
             </form>
             <br />
-            <NavLink to="/register" className="text-light" style="color: black">
+            <NavLink to="/register" className="text-dark">
               Create an account
             </NavLink>
           </div>

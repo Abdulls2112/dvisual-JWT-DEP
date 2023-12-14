@@ -103,7 +103,7 @@ section{
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(26, 26, 26, 0.8); /* Adjusted background color for visibility */
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
@@ -122,6 +122,7 @@ section{
 .box p:first-child {
   margin-bottom: 10px;
 }
+
 
   .sitedabba {
   width: 100%;
@@ -153,8 +154,7 @@ section{
 .mysitebutton {
   margin-top: 30px;
   margin-left: 20px;
-  background: linear-gradient(to bottom, #D7A881 5%, #D7A881 100%);
-  background-color: #D7A881;
+  background: linear-gradient(to bottom, #394240 5%, #394240 100%); /* Updated background color */
   border-radius: 8px;
   display: inline-block;
   cursor: pointer;
@@ -164,18 +164,18 @@ section{
   font-weight: bold;
   padding: 13px 32px;
   text-decoration: none;
-  text-shadow: 0px 1px 0px #D7A881;
+  text-shadow: 0px 1px 0px #394240; /* Updated text shadow */
 }
 
 .mysitebutton:hover {
-  background: linear-gradient(to bottom, #eb7311 5%, #eb6d07 100%);
-  background-color: #D7A881;
+  background: linear-gradient(to bottom, #57656E 5%, #57656E 100%); /* Updated hover background color */
 }
 
 .mysitebutton:active {
   position: relative;
   top: 1px;
 }
+
 
 .afterbutton {
   position: absolute;

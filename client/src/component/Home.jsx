@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <section
         style={{
-          backgroundColor: '#1a1a1a',
+          backgroundColor: '#333',
           width: '100%',
           height: '90vh',
           display: 'flex',
@@ -17,15 +17,15 @@ const Home = () => {
         <div
           style={{
             textAlign: 'center',
-            padding: '20px',
-            border: '1px solid #333',
+            padding: '40px',
+            border: '1px solid #555',
             borderRadius: '10px',
-            boxShadow: '0 0 10px rgba(255, 255, 255, 0.1)',
-            backgroundColor: '#333',
+            boxShadow: '0 0 20px rgba(255, 255, 255, 0.1)',
+            backgroundColor: '#1A1A1A',
             color: '#fff',
           }}
         >
-          <h1 style={{ fontSize: '2.5em', marginBottom: '20px' }}>
+          <h1 style={{ fontSize: '3em', marginBottom: '20px', color: '#D7A881' }}>
             Welcome to DVisual
           </h1>
           <p style={{ fontSize: '1.2em', color: '#aaa', marginBottom: '30px' }}>
@@ -34,15 +34,16 @@ const Home = () => {
           </p>
           <NavLink
             to="/register"
-            className="btn btn-warning"
+            className="btn"
             style={{
-              padding: '10px 20px',
+              padding: '12px 24px',
               fontSize: '1.2em',
               textDecoration: 'none',
               borderRadius: '5px',
-              backgroundColor: '#ffcc00',
+              backgroundColor: '#D7A881',
               color: '#333',
-              boxShadow: '0 0 5px rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 0 10px rgba(255, 255, 255, 0.2)',
+              transition: 'background-color 0.3s',
             }}
           >
             Register

@@ -77,13 +77,13 @@ const Visualize = ({ siteId }) => {
   };
 
   return (
-    <div style={{ backgroundColor: '#333', color: 'white', minHeight: '100vh', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h2>Visualize Page</h2>
-      <label style={{ marginRight: '10px' }}>Select Sensor:</label>
+    <div style={{ backgroundColor: '#f8f8f8', color: '#333', minHeight: '100vh', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <h2 style={{ color: '#555' }}>Visualize Page</h2>
+      <label style={{ marginRight: '10px', color: '#555' }}>Select Sensor:</label>
       <select
         value={selectedSensor}
         onChange={(e) => setSelectedSensor(e.target.value)}
-        style={{ padding: '5px', marginBottom: '20px' }}
+        style={{ padding: '5px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px' }}
       >
         <option value="">Select Sensor</option>
         {sensorNames.map((sensorName, index) => (
@@ -94,39 +94,39 @@ const Visualize = ({ siteId }) => {
       </select>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <p>Visualization for {selectedSensor}</p>
+      <p style={{ color: '#555' }}>Visualization for {selectedSensor}</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', width: '100%' }}>
         {/* Line Chart */}
-        <div style={{ width: '30%', marginBottom: '20px' }}>
-          <h4>Line Chart for {selectedSensor}</h4>
+        <div style={{ width: '30%', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px' }}>
+          <h4 style={{ color: '#555' }}>Line Chart for {selectedSensor}</h4>
           <ResponsiveContainer width="100%" height={400}>
             <LineChart data={sensorData}>
               <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="reading" stroke="#8884d8" name="Reading" />
+              <Line type="monotone" dataKey="reading" stroke="#3498db" name="Reading" />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
         {/* Bar Chart */}
-        <div style={{ width: '30%', marginBottom: '20px' }}>
-          <h4>Bar Chart for {selectedSensor}</h4>
+        <div style={{ width: '30%', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px' }}>
+          <h4 style={{ color: '#555' }}>Bar Chart for {selectedSensor}</h4>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={sensorData}>
               <XAxis dataKey="time" tickFormatter={formatTime} />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="reading" fill="#8884d8" name="Reading" />
+              <Bar dataKey="reading" fill="#3498db" name="Reading" />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Pie Chart */}
-        <div style={{ width: '30%', marginBottom: '20px' }}>
-          <h4>Pie Chart for {selectedSensor}</h4>
+        <div style={{ width: '30%', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px' }}>
+          <h4 style={{ color: '#555' }}>Pie Chart for {selectedSensor}</h4>
           <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie
@@ -136,7 +136,7 @@ const Visualize = ({ siteId }) => {
                 cx="50%"
                 cy="50%"
                 outerRadius={80}
-                fill="#8884d8"
+                fill="#3498db"
                 label
               >
                 {groupDataByDate().map((entry, index) => (

@@ -60,7 +60,7 @@ const Profile = () => {
       }
 
       const response = await axios.post(
-        'https://dvisual-deployment.vercel.app/add-site',
+        'https://dvisual-server-api.vercel.app/add-site',
         {
           site_name: siteName,
           site_location: siteLocation,

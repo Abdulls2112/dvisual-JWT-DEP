@@ -9,99 +9,87 @@ const Profile = () => {
   const [sites, setSites] = useState([]);
   const history = useHistory();
   const [error, setError] = useState('');
- const [siteName, setSiteName] = useState('');
+  const [siteName, setSiteName] = useState('');
   const [siteLocation, setSiteLocation] = useState('');
   const [showAddSiteForm, setShowAddSiteForm] = useState(false);
 
   useEffect(() => {
- const fetchData = async () => {
-  try {
-    
-    // Retrieve token from local storage dhjdhhjdhshjdhhhdh
-    const token = localStorage.getItem('token');
+    const fetchData = async () => {
+      try {
+        // Retrieve token from local storage
+        const token = localStorage.getItem('token');
 
-    // Check if token is present
-    if (!token) {
-      // Handle the case where the token is not present
-      console.error('Token not found in local storage');
-      return;
-    }
-    // Fetch user information using the new /user endpoint
-    const userResponse = await axios.get('https://dvisual-server-api.vercel.app/user', {
-      headers: {
-        authorization: `${token}`, // Include your actual token here
-      },
-    });
+        if (!token) {
+          console.error('Token not found in local storage');
+          return history.push('/login');
+        }
 
-    if (userResponse.data.success) {
-      setLogin(true);
-      setEmail(userResponse.data.user.email);
+        const userResponse = await axios.get('https://dvisual-server-api.vercel.app/user', {
+          headers: {
+            authorization: `${token}`,
+          },
+        });
 
-      // Fetch organization name
-      const organizationResponse = await axios.get(
-        `https://dvisual-server-api.vercel.app/organization`
-      );
-      setOrganizationName(organizationResponse.data.organizationname);
+        if (userResponse.data.success) {
+          setLogin(true);
+          setEmail(userResponse.data.user.email);
 
-      // Fetch the list of sites for the logged-in user's organization
-      const sitesResponse = await axios.get(
-        `https://dvisual-server-api.vercel.app/sites`
-      );
-      setSites(sitesResponse.data.sites);
-    } else {
-      // Redirect to login if the user is not authenticated
-      history.push('/login');
-    }
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    setError('Internal Server Error');
-  }
-};
+          const organizationResponse = await axios.get(`https://dvisual-server-api.vercel.app/organization`);
+          setOrganizationName(organizationResponse.data.organizationname);
+
+          const sitesResponse = await axios.get(`https://dvisual-server-api.vercel.app/sites`);
+          setSites(sitesResponse.data.sites);
+        } else {
+          history.push('/login');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Internal Server Error');
+      }
+    };
 
     fetchData();
   }, [history]);
 
   const handleAddSite = async () => {
-  try {
-    // Fetch the token from local storage
-    const token = localStorage.getItem('token');
+    try {
+      const token = localStorage.getItem('token');
 
-    // Check if the token is present
-    if (!token) {
-      // Handle the case where the token is not present
-      console.error('Token not found in local storage');
-      history.push('/login');
-      return;
-    }
-
-    // Send the token to the backend for authentication
-    const response = await axios.post(
-      'https://dvisual-deployment.vercel.app/add-site',
-      {
-        site_name: siteName,
-        site_location: siteLocation,
-      },
-      {
-        headers: {
-          authorization: `${token}`,
-        },
-        withCredentials: true,
+      if (!token) {
+        console.error('Token not found in local storage');
+        return history.push('/login');
       }
-    );
 
-    if (response.data.success) {
-      setShowAddSiteForm(false);
-      setSiteName('');
-      setSiteLocation('');
-      setError('');
+      const response = await axios.post(
+        'https://dvisual-deployment.vercel.app/add-site',
+        {
+          site_name: siteName,
+          site_location: siteLocation,
+        },
+        {
+          headers: {
+            authorization: `${token}`,
+          },
+          withCredentials: true,
+        }
+      );
 
-    } 
-  } catch (error) {
-    console.error('Error adding site:', error);
-    setError('Internal Server Error');
-  }
-};
-
+      if (response.data.success) {
+        setShowAddSiteForm(false);
+        setSiteName('');
+        setSiteLocation('');
+        setError('');
+        // Fetch the updated list of sites and update the state accordingly
+        const updatedSitesResponse = await axios.get(`https://dvisual-server-api.vercel.app/sites`);
+        setSites(updatedSitesResponse.data.sites);
+      } else {
+        setError(response.data.error);
+      }
+    } catch (error) {
+      console.error('Error adding site:', error);
+      setError('Internal Server Error');
+    }
+  };
 
   const handleSiteButtonClick = (siteId) => {
     history.push(`/visualize/${siteId}`);
@@ -111,10 +99,10 @@ const Profile = () => {
     <>
       <section
         style={{
-          backgroundColor: '#1a1a1a',
-          color: 'white',
+          backgroundColor: '#f8f8f8',
+          color: '#333',
           width: '100%',
-          height: '90vh',
+          minHeight: '90vh',
         }}
       >
         <div className="sitedabba container-xxl">
@@ -124,10 +112,10 @@ const Profile = () => {
             </div>
           ))}
         </div>
-         {showAddSiteForm ? (
-            <>
+        {showAddSiteForm ? (
+          <>
             <div class="afterbutton">
-            <div>
+              <div>
                 <label class="sitename-label">Site Name:</label>
                 <input
                   type="text"
@@ -142,16 +130,14 @@ const Profile = () => {
                   value={siteLocation}
                   onChange={(e) => setSiteLocation(e.target.value)}
                 />
-                <button  onClick={handleAddSite}>Add Site</button>
+                <button onClick={handleAddSite}>Add Site</button>
                 <button onClick={() => setShowAddSiteForm(false)}>Cancel</button>
               </div>
-
             </div>
-           
-            </>
-          ) : (
-            <button class="mysitebutton" onClick={() => setShowAddSiteForm(true)}>Add Site</button>
-          )}
+          </>
+        ) : (
+          <button class="mysitebutton" onClick={() => setShowAddSiteForm(true)}>Add Site</button>
+        )}
         <div className="box">
           <p>Email: {login ? email : null}</p>
           <p>Organization Name: {organizationName}</p>

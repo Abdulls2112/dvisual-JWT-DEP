@@ -16,7 +16,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light rounded" style={{ backdropFilter: 'blur(11px)' }}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light rounded" style={{ backdropFilter: 'blur(34px)' }}>
       <div className="container">
         <NavLink className="navbar-brand" to="/">
           Dvisual

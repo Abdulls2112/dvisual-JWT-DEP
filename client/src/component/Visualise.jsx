@@ -15,8 +15,6 @@ import {
   Cell,
 } from 'recharts';
 
-
-
 const Visualize = ({ siteId }) => {
   const [sensorNames, setSensorNames] = useState([]);
   const [selectedSensor, setSelectedSensor] = useState('');
@@ -79,13 +77,13 @@ const Visualize = ({ siteId }) => {
   };
 
   return (
-    <div style={{ backgroundColor: '#333', color: 'white', minHeight: '100vh', padding: '20px' }}>
+    <div style={{ backgroundColor: '#333', color: 'white', minHeight: '100vh', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h1>Visualize Page</h1>
       <label style={{ marginRight: '10px' }}>Select Sensor:</label>
       <select
         value={selectedSensor}
         onChange={(e) => setSelectedSensor(e.target.value)}
-        style={{ padding: '5px' }}
+        style={{ padding: '5px', marginBottom: '20px' }}
       >
         <option value="">Select Sensor</option>
         {sensorNames.map((sensorName, index) => (
@@ -97,10 +95,10 @@ const Visualize = ({ siteId }) => {
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>Visualization for {selectedSensor}</p>
-      {selectedSensor && (
-        <div style={{ marginTop: '20px' }}>
-          {/* Line Chart */}
-          <h2>Line Chart</h2>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', width: '100%' }}>
+        {/* Line Chart */}
+        <div style={{ width: '30%', marginBottom: '20px' }}>
+          <h2>Line Chart for {selectedSensor}</h2>
           <ResponsiveContainer width="100%" height={400}>
             <LineChart data={sensorData}>
               <XAxis dataKey="date" />
@@ -110,10 +108,12 @@ const Visualize = ({ siteId }) => {
               <Line type="monotone" dataKey="reading" stroke="#8884d8" name="Reading" />
             </LineChart>
           </ResponsiveContainer>
+        </div>
 
-          {/* Bar Chart */}
-          <h2>Bar Chart</h2>
-          <ResponsiveContainer width="100%" height={400} style={{ marginTop: '20px' }}>
+        {/* Bar Chart */}
+        <div style={{ width: '30%', marginBottom: '20px' }}>
+          <h2>Bar Chart for {selectedSensor}</h2>
+          <ResponsiveContainer width="100%" height={400}>
             <BarChart data={sensorData}>
               <XAxis dataKey="time" tickFormatter={formatTime} />
               <YAxis />
@@ -122,10 +122,12 @@ const Visualize = ({ siteId }) => {
               <Bar dataKey="reading" fill="#8884d8" name="Reading" />
             </BarChart>
           </ResponsiveContainer>
+        </div>
 
-          {/* Pie Chart */}
-          <h2>Pie Chart</h2>
-          <ResponsiveContainer width="100%" height={400} style={{ marginTop: '20px' }}>
+        {/* Pie Chart */}
+        <div style={{ width: '30%', marginBottom: '20px' }}>
+          <h2>Pie Chart for {selectedSensor}</h2>
+          <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie
                 data={groupDataByDate()}
@@ -146,7 +148,7 @@ const Visualize = ({ siteId }) => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-      )}
+      </div>
     </div>
   );
 };

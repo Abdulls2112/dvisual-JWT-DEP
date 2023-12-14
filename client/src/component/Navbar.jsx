@@ -3,34 +3,31 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [forceRender, setForceRender] = useState(false);
-useEffect(() => {
-    const checkLogin = async () => {
-      try {
-        const token = localStorage.getItem('jwtToken');
-        if (token) {
-      // You can perform additional JWT validation here if needed
-      // For simplicity, we'll just assume that if a token is present, the user is logged in
-      isLoggedIn(true);
-    }
-        setForceRender(prev => !prev); // Force a re-render
-      } catch (error) {
-        console.error('Error checking login status:', error);
-      }
-    };
-  
-    checkLogin();
-  }, [forceRender]);
- // useEffect(() => {
-    // Check if a JWT token is present in local storage
-    //const token = localStorage.getItem('jwtToken');
 
-    //if (token) {
-      // You can perform additional JWT validation here if needed
-      // For simplicity, we'll just assume that if a token is present, the user is logged in
-     // setIsLoggedIn(true);
-   // }
-//  }, []);
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      // Check if a JWT token is present in local storage
+      const token = localStorage.getItem('jwtToken');
+      // Update the login status based on the token
+      setIsLoggedIn(!!token);
+    };
+
+    // Call the function to check login status initially
+    checkLoginStatus();
+
+    // Add a custom event listener to update login status dynamically
+    const handleLoginStatusChange = () => {
+      checkLoginStatus();
+    };
+
+    // Listen for the custom event
+    document.addEventListener('loginStatusChange', handleLoginStatusChange);
+
+    // Remove the event listener when the component is unmounted
+    return () => {
+      document.removeEventListener('loginStatusChange', handleLoginStatusChange);
+    };
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light rounded" style={{ backdropFilter: 'blur(34px)' }}>

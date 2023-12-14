@@ -16,7 +16,6 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Retrieve token from local storage
         const token = localStorage.getItem('token');
 
         if (!token) {
@@ -79,9 +78,16 @@ const Profile = () => {
         setSiteName('');
         setSiteLocation('');
         setError('');
-        // Fetch the updated list of sites and update the state accordingly
-        const updatedSitesResponse = await axios.get(`https://dvisual-server-api.vercel.app/sites`);
-        setSites(updatedSitesResponse.data.sites);
+
+        // Update the state to include the new site
+        setSites((prevSites) => [
+          ...prevSites,
+          {
+            site_id: response.data.siteId,
+            site_name: siteName,
+            site_location: siteLocation,
+          },
+        ]);
       } else {
         setError(response.data.error);
       }
@@ -103,11 +109,16 @@ const Profile = () => {
           color: '#333',
           width: '100%',
           minHeight: '90vh',
+          padding: '20px',
         }}
       >
         <div className="sitedabba container-xxl">
           {sites.map((site) => (
-            <div class="added-button" key={site.site_id} onClick={() => handleSiteButtonClick(site.site_id)}>
+            <div
+              class="added-button"
+              key={site.site_id}
+              onClick={() => handleSiteButtonClick(site.site_id)}
+            >
               {site.site_name} - {site.site_location}
             </div>
           ))}
@@ -136,7 +147,9 @@ const Profile = () => {
             </div>
           </>
         ) : (
-          <button class="mysitebutton" onClick={() => setShowAddSiteForm(true)}>Add Site</button>
+          <button class="mysitebutton" onClick={() => setShowAddSiteForm(true)}>
+            Add Site
+          </button>
         )}
         <div className="box">
           <p>Email: {login ? email : null}</p>

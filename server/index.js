@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
-
+const saltRounds = 10;
 const PORT = process.env.PORT || 8000;
 const BaseURL = process.env.URL || '';
 const app = express();

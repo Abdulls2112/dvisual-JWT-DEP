@@ -50,11 +50,35 @@ h1{
 section{
   background-color: #1A1A1A;
 }
-  nav{
-    height: 90px !important;
-    font-weight: 700;
-    
-  }
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  border-radius: 10px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Glass morphism effect */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle glow */
+}
+
+.navbar-brand {
+  color: #333; /* Text color */
+  font-weight: bold;
+}
+
+.navbar-toggler-icon {
+  border-color: #333; /* Icon color */
+}
+
+.navbar-nav {
+  margin-right: -10px; /* Adjust the margin for better alignment */
+}
+
+.nav-link {
+  color: #333; /* Link color */
+  transition: color 0.3s ease-in-out; /* Smooth color transition on hover */
+}
+
+.nav-link:hover {
+  color: #007bff; /* Change color on hover (you can customize this) */
+}
+
 
 
   

@@ -24,6 +24,7 @@ const Visualize = ({ siteId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [chartType, setChartType] = useState('line');
 
   useEffect(() => {
     const fetchSensorNames = async () => {
@@ -85,23 +86,41 @@ const Visualize = ({ siteId }) => {
   return (
     <div style={{ backgroundColor: '#f8f8f8', color: '#333', minHeight: '100vh', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2 style={{ color: '#555' }}>Visualize Page</h2>
-      <label style={{ marginRight: '10px', color: '#555' }}>Select Sensor:</label>
-      <select
-        value={selectedSensor}
-        onChange={(e) => setSelectedSensor(e.target.value)}
-        style={{ padding: '5px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px' }}
-      >
-        <option value="">Select Sensor</option>
-        {sensorNames.map((sensorName, index) => (
-          <option key={index} value={sensorName}>
-            {sensorName}
-          </option>
-        ))}
-      </select>
 
-      {/* Date Picker */}
-      <div style={{ margin: '20px 0', color: '#555' }}>
-        <label>Select Date:</label>
+      {/* Sensor Selection Card */}
+      <div style={{ marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px', width: '30%' }}>
+        <h4 style={{ color: '#555' }}>Select Sensor</h4>
+        <select
+          value={selectedSensor}
+          onChange={(e) => setSelectedSensor(e.target.value)}
+          style={{ padding: '5px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px' }}
+        >
+          <option value="">Select Sensor</option>
+          {sensorNames.map((sensorName, index) => (
+            <option key={index} value={sensorName}>
+              {sensorName}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Chart Type Selection Card */}
+      <div style={{ marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px', width: '30%' }}>
+        <h4 style={{ color: '#555' }}>Select Chart Type</h4>
+        <select
+          value={chartType}
+          onChange={(e) => setChartType(e.target.value)}
+          style={{ padding: '5px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px' }}
+        >
+          <option value="line">Line Chart</option>
+          <option value="bar">Bar Chart</option>
+          <option value="pie">Pie Chart</option>
+        </select>
+      </div>
+
+      {/* Date Selection */}
+      <div style={{ marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px', width: '30%' }}>
+        <h4 style={{ color: '#555' }}>Select Date</h4>
         <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} />
       </div>
 
@@ -109,59 +128,63 @@ const Visualize = ({ siteId }) => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <p style={{ color: '#555' }}>Visualization for {selectedSensor}</p>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', width: '100%' }}>
-       {/* Line Chart */}
-        <div style={{ width: '30%', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px' }}>
-          <h4 style={{ color: '#555' }}>Line Chart for {selectedSensor}</h4>
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={sensorData}>
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="reading" stroke="#3498db" name="Reading" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+      {/* Visualization */}
+      <div style={{ width: '70%', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px' }}>
+        {chartType === 'line' && (
+          <div>
+            <h4 style={{ color: '#555' }}>Line Chart for {selectedSensor}</h4>
+            <ResponsiveContainer width="100%" height={400}>
+              <LineChart data={sensorData}>
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="reading" stroke="#3498db" name="Reading" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
 
-        {/* Bar Chart */}
-        <div style={{ width: '30%', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px' }}>
-          <h4 style={{ color: '#555' }}>Bar Chart for {selectedSensor}</h4>
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={sensorData}>
-              <XAxis dataKey="time" tickFormatter={formatTime} />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="reading" fill="#3498db" name="Reading" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        {chartType === 'bar' && (
+          <div>
+            <h4 style={{ color: '#555' }}>Bar Chart for {selectedSensor}</h4>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart data={sensorData}>
+                <XAxis dataKey="time" tickFormatter={formatTime} />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="reading" fill="#3498db" name="Reading" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        )}
 
-        {/* Pie Chart */}
-        <div style={{ width: '30%', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)', backgroundColor: 'white', padding: '20px' }}>
-          <h4 style={{ color: '#555' }}>Pie Chart for {selectedSensor}</h4>
-          <ResponsiveContainer width="100%" height={400}>
-            <PieChart>
-              <Pie
-                data={groupDataByDate()}
-                dataKey="reading"
-                nameKey="date"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                fill="#3498db"
-                label
-              >
-                {groupDataByDate().map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+        {chartType === 'pie' && (
+          <div>
+            <h4 style={{ color: '#555' }}>Pie Chart for {selectedSensor}</h4>
+            <ResponsiveContainer width="100%" height={400}>
+              <PieChart>
+                <Pie
+                  data={groupDataByDate()}
+                  dataKey="reading"
+                  nameKey="date"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  fill="#3498db"
+                  label
+                >
+                  {groupDataByDate().map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        )}
       </div>
     </div>
   );
